@@ -1,5 +1,5 @@
 CMakeFiles/monitor.dir/src/process.cpp.o: \
- /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/CppND-System-Monitor/src/process.cpp \
+ /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/src/process.cpp \
  /usr/include/stdc-predef.h /usr/include/unistd.h /usr/include/features.h \
  /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
  /usr/include/bits/long-double.h /usr/include/gnu/stubs.h \
@@ -129,4 +129,4 @@ CMakeFiles/monitor.dir/src/process.cpp.o: \
  /usr/include/c++/10/bits/stl_vector.h \
  /usr/include/c++/10/bits/stl_bvector.h \
  /usr/include/c++/10/bits/vector.tcc \
- /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/CppND-System-Monitor/include/process.h
+ /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/include/process.h

@@ -1,7 +1,7 @@
 CMakeFiles/monitor.dir/src/ncurses_display.cpp.o: \
- /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/CppND-System-Monitor/src/ncurses_display.cpp \
+ /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/src/ncurses_display.cpp \
  /usr/include/stdc-predef.h \
- /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/CppND-System-Monitor/include/ncurses_display.h \
+ /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/include/ncurses_display.h \
  /usr/include/curses.h /usr/include/ncurses_dll.h \
  /usr/lib/gcc/x86_64-redhat-linux/10/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/libc-header-start.h \
@@ -23,7 +23,7 @@ CMakeFiles/monitor.dir/src/ncurses_display.cpp.o: \
  /usr/include/bits/floatn-common.h /usr/include/bits/types/wint_t.h \
  /usr/include/bits/types/mbstate_t.h /usr/include/bits/types/locale_t.h \
  /usr/include/bits/types/__locale_t.h /usr/include/unctrl.h \
- /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/CppND-System-Monitor/include/process.h \
+ /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/include/process.h \
  /usr/include/c++/10/string \
  /usr/include/c++/10/x86_64-redhat-linux/bits/c++config.h \
  /usr/include/c++/10/x86_64-redhat-linux/bits/os_defines.h \
@@ -106,12 +106,12 @@ CMakeFiles/monitor.dir/src/ncurses_display.cpp.o: \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
  /usr/include/bits/types/error_t.h /usr/include/c++/10/bits/charconv.h \
  /usr/include/c++/10/bits/basic_string.tcc \
- /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/CppND-System-Monitor/include/system.h \
+ /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/include/system.h \
  /usr/include/c++/10/vector /usr/include/c++/10/bits/stl_uninitialized.h \
  /usr/include/c++/10/bits/stl_vector.h \
  /usr/include/c++/10/bits/stl_bvector.h \
  /usr/include/c++/10/bits/vector.tcc \
- /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/CppND-System-Monitor/include/processor.h \
+ /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/include/processor.h \
  /usr/include/c++/10/chrono /usr/include/c++/10/ratio \
  /usr/include/c++/10/limits /usr/include/c++/10/ctime \
  /usr/include/c++/10/bits/parse_numbers.h /usr/include/c++/10/thread \
@@ -134,7 +134,7 @@ CMakeFiles/monitor.dir/src/ncurses_display.cpp.o: \
  /usr/include/c++/10/backward/auto_ptr.h \
  /usr/include/c++/10/pstl/glue_memory_defs.h \
  /usr/include/c++/10/pstl/execution_defs.h \
- /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/CppND-System-Monitor/include/format.h \
+ /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/include/format.h \
  /usr/include/c++/10/iostream /usr/include/c++/10/ostream \
  /usr/include/c++/10/ios /usr/include/c++/10/bits/ios_base.h \
  /usr/include/c++/10/bits/locale_classes.h \
@@ -153,4 +153,4 @@ CMakeFiles/monitor.dir/src/ncurses_display.cpp.o: \
  /usr/include/c++/10/bits/basic_ios.tcc \
  /usr/include/c++/10/bits/ostream.tcc /usr/include/c++/10/istream \
  /usr/include/c++/10/bits/istream.tcc \
- /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/CppND-System-Monitor/include/system.h
+ /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/include/system.h

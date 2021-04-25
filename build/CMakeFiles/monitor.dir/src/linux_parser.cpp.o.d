@@ -1,7 +1,7 @@
 CMakeFiles/monitor.dir/src/linux_parser.cpp.o: \
- /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/CppND-System-Monitor/src/linux_parser.cpp \
+ /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/src/linux_parser.cpp \
  /usr/include/stdc-predef.h \
- /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/CppND-System-Monitor/include/linux_parser.h \
+ /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/include/linux_parser.h \
  /usr/include/c++/10/fstream /usr/include/c++/10/istream \
  /usr/include/c++/10/ios /usr/include/c++/10/iosfwd \
  /usr/include/c++/10/x86_64-redhat-linux/bits/c++config.h \

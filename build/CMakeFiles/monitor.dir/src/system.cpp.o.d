@@ -1,7 +1,7 @@
 CMakeFiles/monitor.dir/src/system.cpp.o: \
- /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/CppND-System-Monitor/src/system.cpp \
+ /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/src/system.cpp \
  /usr/include/stdc-predef.h \
- /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/CppND-System-Monitor/include/system.h \
+ /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/include/system.h \
  /usr/include/c++/10/string \
  /usr/include/c++/10/x86_64-redhat-linux/bits/c++config.h \
  /usr/include/bits/wordsize.h \
@@ -110,8 +110,8 @@ CMakeFiles/monitor.dir/src/system.cpp.o: \
  /usr/include/c++/10/bits/stl_vector.h \
  /usr/include/c++/10/bits/stl_bvector.h \
  /usr/include/c++/10/bits/vector.tcc \
- /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/CppND-System-Monitor/include/process.h \
- /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/CppND-System-Monitor/include/processor.h \
+ /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/include/process.h \
+ /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/include/processor.h \
  /usr/include/unistd.h /usr/include/bits/posix_opt.h \
  /usr/include/bits/environments.h /usr/include/bits/confname.h \
  /usr/include/bits/getopt_posix.h /usr/include/bits/getopt_core.h \
@@ -124,7 +124,7 @@ CMakeFiles/monitor.dir/src/system.cpp.o: \
  /usr/include/c++/10/bits/stl_set.h \
  /usr/include/c++/10/bits/stl_multiset.h \
  /usr/include/c++/10/bits/erase_if.h \
- /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/CppND-System-Monitor/include/linux_parser.h \
+ /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/include/linux_parser.h \
  /usr/include/c++/10/fstream /usr/include/c++/10/istream \
  /usr/include/c++/10/ios /usr/include/c++/10/bits/ios_base.h \
  /usr/include/c++/10/bits/locale_classes.h \
@@ -196,5 +196,5 @@ CMakeFiles/monitor.dir/src/system.cpp.o: \
  /usr/include/c++/10/bits/regex.h /usr/include/c++/10/bits/regex.tcc \
  /usr/include/c++/10/bits/regex_executor.h \
  /usr/include/c++/10/bits/regex_executor.tcc \
- /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/CppND-System-Monitor/include/process.h \
- /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/CppND-System-Monitor/include/processor.h
+ /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/include/process.h \
+ /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/include/processor.h

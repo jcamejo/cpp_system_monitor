@@ -1,5 +1,5 @@
 CMakeFiles/monitor.dir/src/format.cpp.o: \
- /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/CppND-System-Monitor/src/format.cpp \
+ /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/src/format.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/10/string \
  /usr/include/c++/10/x86_64-redhat-linux/bits/c++config.h \
  /usr/include/bits/wordsize.h \
@@ -104,4 +104,4 @@ CMakeFiles/monitor.dir/src/format.cpp.o: \
  /usr/include/asm-generic/errno-base.h /usr/include/bits/types/error_t.h \
  /usr/include/c++/10/bits/charconv.h \
  /usr/include/c++/10/bits/basic_string.tcc \
- /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/CppND-System-Monitor/include/format.h
+ /home/juan/Dev/c++/udacity_projects/project_2_system_monitor/include/format.h

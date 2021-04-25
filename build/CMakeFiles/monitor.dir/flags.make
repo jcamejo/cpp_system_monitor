@@ -4,7 +4,7 @@
 # compile CXX with /usr/lib64/ccache/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/juan/Dev/c++/udacity_projects/project_2_system_monitor/CppND-System-Monitor/include
+CXX_INCLUDES = -I/home/juan/Dev/c++/udacity_projects/project_2_system_monitor/include
 
-CXX_FLAGS = -Wall -Wextra -std=gnu++17
+CXX_FLAGS = -g -Wall -Wextra -std=gnu++17
 
