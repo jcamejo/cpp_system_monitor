@@ -55,8 +55,8 @@ string LinuxParser::Kernel() {
 // BONUS: Update this to use std::filesystem
 vector<int> LinuxParser::Pids() {
   vector<int> pids;
-  DIR* directory = opendir(kProcDirectory.c_str());
-  struct dirent* file;
+  DIR *directory = opendir(kProcDirectory.c_str());
+  struct dirent *file;
   while ((file = readdir(directory)) != nullptr) {
     // Is this a directory?
     if (file->d_type == DT_DIR) {
@@ -76,10 +76,10 @@ vector<int> LinuxParser::Pids() {
 float LinuxParser::MemoryUtilization() {
   string line;
   string label;
-  unsigned int value;
-  unsigned int memTotal{0};
-  unsigned int memFree{0};
-  unsigned int memUsed{0};
+  float value;
+  float memTotal{0};
+  float memFree{0};
+  float memUsed{0};
 
   std::ifstream filestream(kProcDirectory + kMeminfoFilename);
 
@@ -101,7 +101,7 @@ float LinuxParser::MemoryUtilization() {
 
   memUsed = memTotal - memFree;
 
-  return (memUsed * 100) / memTotal;
+  return memUsed / memTotal;
 }
 
 // TODO: Read and return the system uptime
