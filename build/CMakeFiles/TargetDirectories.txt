@@ -1,3 +1,0 @@
-/home/juan/Dev/c++/udacity_projects/project_2_system_monitor/build/CMakeFiles/rebuild_cache.dir
-/home/juan/Dev/c++/udacity_projects/project_2_system_monitor/build/CMakeFiles/edit_cache.dir
-/home/juan/Dev/c++/udacity_projects/project_2_system_monitor/build/CMakeFiles/monitor.dir
