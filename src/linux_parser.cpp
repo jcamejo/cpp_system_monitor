@@ -3,6 +3,7 @@
 #include <dirent.h>
 #include <unistd.h>
 
+#include <filesystem>
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -13,6 +14,8 @@ using std::stof;
 using std::string;
 using std::to_string;
 using std::vector;
+
+namespace fs = std::filesystem;
 
 // Idea: Making the Parser adaptable to not only the Linux Parser but also other
 // DONE: An example of how to read data from the filesystem
@@ -137,8 +140,34 @@ vector<string> LinuxParser::CpuUtilization() {
   return cpus;
 }
 
+bool IsNumber(const string &str) {
+  for (char const &c : str) {
+    if (std::isdigit(c) == 0) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 // TODO: Read and return the total number of processes
-int LinuxParser::TotalProcesses() { return 0; }
+int LinuxParser::TotalProcesses() {
+  vector<string> paths;
+  string dirname;
+  int total{0};
+
+  for (auto &entry : fs::directory_iterator(kProcDirectory)) {
+    if (entry.is_directory()) {
+      dirname = entry.path().stem().string();
+
+      if (IsNumber(dirname)) {
+        total++;
+      }
+    }
+  }
+
+  return total;
+}
 
 // TODO: Read and return the number of running processes
 int LinuxParser::RunningProcesses() { return 0; }
