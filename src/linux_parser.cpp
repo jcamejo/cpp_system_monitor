@@ -56,6 +56,7 @@ string LinuxParser::Kernel() {
 }
 
 // BONUS: Update this to use std::filesystem
+// REF: https://en.cppreference.com/w/cpp/filesystem/directory_iterator
 vector<int> LinuxParser::Pids() {
   vector<int> pids;
   DIR *directory = opendir(kProcDirectory.c_str());
@@ -113,7 +114,6 @@ long LinuxParser::UpTime() {
   string label;
   long uptime;
   long idleUptime;
-  long value{0};
 
   std::ifstream filestream(kProcDirectory + kUptimeFilename);
 
@@ -129,6 +129,7 @@ long LinuxParser::UpTime() {
   return uptime;
 }
 
+// https://classroom.udacity.com/nanodegrees/nd213/parts/f9fffe8e-1984-4045-92b6-64854de4df2b/modules/0a4b606e-7aa2-4e1c-8d67-cb5ddd41a6b5/lessons/4636c0ce-e36e-479b-ba36-58b4b849a9e8/concepts/629dbd7b-18f2-4f43-9cb7-d74714b761af
 // TODO: Read and return the number of jiffies for the system
 long LinuxParser::Jiffies() { return 0; }
 
