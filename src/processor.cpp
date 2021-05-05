@@ -10,7 +10,6 @@
 using std::string;
 using std::vector;
 
-// TODO: Return the aggregate CPU utilization
 /*
 * Used formula
 * https://stackoverflow.com/questions/23367857/accurate-calculation-of-cpu-usage-given-in-percentage-in-linux
