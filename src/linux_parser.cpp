@@ -42,7 +42,6 @@ string LinuxParser::OperatingSystem() {
   return value;
 }
 
-// DONE: An example of how to read data from the filesystem
 string LinuxParser::Kernel() {
   string os, kernel, version;
   string line;
@@ -218,9 +217,42 @@ string LinuxParser::Command(int pid [[maybe_unused]]) { return string(); }
 // REMOVE: [[maybe_unused]] once you define the function
 string LinuxParser::Ram(int pid [[maybe_unused]]) { return string(); }
 
-// TODO: Read and return the user ID associated with a process
-// REMOVE: [[maybe_unused]] once you define the function
-string LinuxParser::Uid(int pid [[maybe_unused]]) { return string(); }
+string LinuxParser::Uid(int pid) {
+  string label;
+  string line;
+  string username;
+  string user;
+  int value;
+  int uid;
+
+  std::ifstream filestream(kProcDirectory + to_string(pid) + kStatFilename);
+
+  if (filestream.is_open()) {
+    while (std::getline(filestream, line)) {
+      std::istringstream linestream(line);
+      while (linestream >> label >> value) {
+        if (label == "Uid: ") {
+          uid = value;
+        }
+      }
+    }
+  }
+
+  std::ifstream etcFilestream(kPasswordPath);
+
+  if (etcFilestream.is_open()) {
+    while (std::getline(etcFilestream, line)) {
+      std::istringstream linestream(line);
+
+      while (linestream >> user) {
+        // Use rfind
+        // https://www.geeksforgeeks.org/processing-strings-using-stdistringstream/
+      }
+    }
+  }
+
+  return username;
+}
 
 // TODO: Read and return the user associated with a process
 // REMOVE: [[maybe_unused]] once you define the function
