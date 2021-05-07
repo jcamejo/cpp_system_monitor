@@ -1,4 +1,5 @@
 #include "linux_parser.h"
+#include "helpers.h"
 
 #include <dirent.h>
 #include <unistd.h>
@@ -222,16 +223,20 @@ string LinuxParser::Uid(int pid) {
   string line;
   string username;
   string user;
+  string userId;
+  vector<string> tokens;
   int value;
   int uid;
 
-  std::ifstream filestream(kProcDirectory + to_string(pid) + kStatFilename);
+  string statPath = kProcDirectory + to_string(pid) + kStatusFilename;
+
+  std::ifstream filestream(statPath);
 
   if (filestream.is_open()) {
     while (std::getline(filestream, line)) {
       std::istringstream linestream(line);
       while (linestream >> label >> value) {
-        if (label == "Uid: ") {
+        if (label == "Uid:") {
           uid = value;
         }
       }
@@ -242,12 +247,7 @@ string LinuxParser::Uid(int pid) {
 
   if (etcFilestream.is_open()) {
     while (std::getline(etcFilestream, line)) {
-      std::istringstream linestream(line);
-
-      while (linestream >> user) {
-        // Use rfind
-        // https://www.geeksforgeeks.org/processing-strings-using-stdistringstream/
-      }
+      tokens = Helpers::Tokenize(line, ":");
     }
   }
 
