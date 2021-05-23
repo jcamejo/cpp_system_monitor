@@ -1,4 +1,5 @@
 #include "linux_parser.h"
+#include "format.h"
 #include "helpers.h"
 
 #include <dirent.h>
@@ -123,8 +124,6 @@ long LinuxParser::UpTime() {
 // 1,000, then it is incremented 1,000 times (that is, one tick every 1/1,000
 // seconds). Once defined, the programmable interrupt timer (PIT), which is a
 // hardware component, is programmed with that value
-
-// TODO: Read and return CPU utilization
 vector<string> LinuxParser::CpuUtilization() {
   string line;
   vector<string> cpus;
@@ -141,17 +140,16 @@ vector<string> LinuxParser::CpuUtilization() {
   return cpus;
 }
 
-// TODO::Read and return CPU utilization of a specific PID
 long LinuxParser::CpuUtilization(int pid) {
   long uptime = LinuxParser::UpTime();
   string line;
   char delim = ' ';
   long utime;     // CPU time spent in user code, measured in clock ticks
   long stime;     // CPU time spent in kernel code, measured in clock ticks
-  long cutime;    // Waited-for children's CPU time spent in user code (in clock
-                  // ticks)
-  long cstime;    // Waited-for children's CPU time spent in kernel code (in
+  long cutime;    // Waited-for children's CPU time spent in user code (in
                   // clock ticks)
+  long cstime;    // Waited-for children's CPU time spent in kernel code
+                  // (in clock ticks)
   long starttime; // Time when the process started, measured in clock ticks
   long totalTime;
   long seconds;
@@ -164,17 +162,23 @@ long LinuxParser::CpuUtilization(int pid) {
   if (filestream.is_open()) {
     while (std::getline(filestream, line)) {
       procData = Helpers::Tokenize(line, delim);
-      utime = std::stoul(procData[14]);
-      stime = std::stoul(procData[15]);
-      cutime = std::stoul(procData[16]);
-      cstime = std::stoul(procData[17]);
-      starttime = (std::stoul(procData[22]) / hertz);
+
+      utime = std::stoul(procData[13]);
+      stime = std::stoul(procData[14]);
+      cutime = std::stoul(procData[15]);
+      cstime = std::stoul(procData[16]);
+      starttime = (std::stoul(procData[21]));
     }
   }
 
   totalTime = utime + stime;
   totalTime += cutime + cstime;
-  seconds = uptime - starttime;
+  seconds = uptime - (starttime / hertz);
+
+  if (seconds <= 0) {
+    return 0;
+  }
+
   totalTime = totalTime / hertz;
   usage = totalTime / seconds;
 
@@ -191,7 +195,6 @@ bool IsNumber(const string &str) {
   return true;
 }
 
-// TODO: Read and return the total number of processes
 int LinuxParser::TotalProcesses() {
   string line;
   string label;
@@ -215,7 +218,6 @@ int LinuxParser::TotalProcesses() {
   return total;
 }
 
-// TODO: Read and return the number of running processes
 int LinuxParser::RunningProcesses() {
   string line;
   string label;
@@ -239,13 +241,41 @@ int LinuxParser::RunningProcesses() {
   return total;
 }
 
-// TODO: Read and return the command associated with a process
-// REMOVE: [[maybe_unused]] once you define the function
-string LinuxParser::Command(int pid [[maybe_unused]]) { return string(); }
+string LinuxParser::Command(int pid) {
+  std::ifstream filestream(kProcDirectory + to_string(pid) + kCmdlineFilename);
+  string cmdLine;
+  string line;
 
-// TODO: Read and return the memory used by a process
-// REMOVE: [[maybe_unused]] once you define the function
-string LinuxParser::Ram(int pid [[maybe_unused]]) { return string(); }
+  if (filestream.is_open()) {
+    while (std::getline(filestream, line)) {
+      std::istringstream linestream(line);
+      linestream >> cmdLine;
+    }
+  }
+
+  return cmdLine;
+}
+
+string LinuxParser::Ram(int pid) {
+  std::ifstream filestream(kProcDirectory + to_string(pid) + kStatusFilename);
+  string line;
+  string label;
+  unsigned long long value;
+  unsigned long long memory;
+
+  if (filestream.is_open()) {
+    while (std::getline(filestream, line)) {
+      std::istringstream linestream(line);
+      while (linestream >> label >> value) {
+        if (label == "VmSize") {
+          memory = value;
+        }
+      }
+    }
+  }
+
+  return to_string(memory / 1000);
+}
 
 string LinuxParser::Uid(int pid) {
   string label;
@@ -288,10 +318,26 @@ string LinuxParser::Uid(int pid) {
   return username;
 }
 
-// TODO: Read and return the user associated with a process
-// REMOVE: [[maybe_unused]] once you define the function
 string LinuxParser::User(int pid [[maybe_unused]]) { return string(); }
 
-// TODO: Read and return the uptime of a process
-// REMOVE: [[maybe_unused]] once you define the function
-long LinuxParser::UpTime(int pid [[maybe_unused]]) { return 0; }
+long LinuxParser::UpTime(int pid) {
+  string line;
+  char delim = ' ';
+  long seconds;
+  long hertz = sysconf(_SC_CLK_TCK);
+  long starttime;
+  vector<string> procData;
+
+  std::ifstream filestream(kProcDirectory + to_string(pid) + kStatFilename);
+
+  if (filestream.is_open()) {
+    while (std::getline(filestream, line)) {
+      procData = Helpers::Tokenize(line, delim);
+      starttime = (std::stoul(procData[21]));
+    }
+  }
+
+  seconds = starttime / hertz;
+
+  return seconds;
+}
