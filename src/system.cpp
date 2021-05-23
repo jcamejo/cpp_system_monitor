@@ -29,7 +29,7 @@ vector<Process> &System::Processes() {
   }
 
   std::sort(processes_.begin(), processes_.end(),
-            [](const Process &a, const Process &b) { return b < a; });
+            [](const Process &a, const Process &b) { return a < b; });
   return processes_;
 }
 
