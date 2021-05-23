@@ -260,8 +260,8 @@ string LinuxParser::Ram(int pid) {
   std::ifstream filestream(kProcDirectory + to_string(pid) + kStatusFilename);
   string line;
   string label;
-  unsigned long long value;
-  unsigned long long memory;
+  long long value;
+  long long memory;
 
   if (filestream.is_open()) {
     while (std::getline(filestream, line)) {

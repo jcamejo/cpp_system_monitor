@@ -21,7 +21,10 @@ public:
 
   Process(int pid, string basePath) : pid_(pid) {
     path_ = basePath + "/" + std::to_string(pid_);
+    cpu_usage = CpuUtilization();
   };
+
+  float cpu_usage;
 
 private:
   int pid_;
