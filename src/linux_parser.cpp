@@ -260,21 +260,22 @@ string LinuxParser::Ram(int pid) {
   std::ifstream filestream(kProcDirectory + to_string(pid) + kStatusFilename);
   string line;
   string label;
-  long long value;
-  long long memory;
+  long value{0};
+  long memory{0};
 
   if (filestream.is_open()) {
     while (std::getline(filestream, line)) {
       std::istringstream linestream(line);
       while (linestream >> label >> value) {
-        if (label == "VmSize") {
+        if (label == "VmSize:") {
           memory = value;
+          break;
         }
       }
     }
   }
 
-  return to_string(memory / 1000);
+  return memory / 1000;
 }
 
 string LinuxParser::Uid(int pid) {
