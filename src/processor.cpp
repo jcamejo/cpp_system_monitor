@@ -69,6 +69,7 @@ float Processor::Utilization() {
     return 0.0;
   }
 
+  // TODO: Change to Enums
   user = usage[0];
   nice = usage[1];
   system = usage[2];

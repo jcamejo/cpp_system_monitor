@@ -22,8 +22,7 @@ string Process::Command() { return LinuxParser::Command(pid_); }
 
 // TODO: Return this process's memory utilization
 string Process::Ram() { 
-  long int ram = LinuxParser::Ram(pid_);
-  memory = ram;
+  memory = LinuxParser::Ram(pid_);
   return to_string(memory); 
 }
 
@@ -33,6 +32,6 @@ string Process::User() { return LinuxParser::Uid(pid_); }
 // TODO: Return the age of this process (in seconds)
 long int Process::UpTime() { return LinuxParser::UpTime(pid_); }
 
-bool Process::operator<(Process const &a) const {
-  return a.memory < memory;
+bool Process::operator<(Process const &b) const {
+  return memory < b.memory ;
 }
