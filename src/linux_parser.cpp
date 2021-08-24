@@ -275,7 +275,7 @@ string LinuxParser::Ram(int pid) {
     }
   }
 
-  return memory / 1000;
+  return to_string(memory / 1000);
 }
 
 string LinuxParser::Uid(int pid) {

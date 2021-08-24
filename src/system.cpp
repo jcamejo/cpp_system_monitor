@@ -28,6 +28,7 @@ vector<Process> &System::Processes() {
     processes_.push_back(p);
   }
 
+  // SORT PROCESSES
   std::sort(processes_.begin(), processes_.end(),
             [](const Process &a, const Process &b) { return a < b; });
   return processes_;
