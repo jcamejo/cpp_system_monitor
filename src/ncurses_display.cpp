@@ -4,6 +4,7 @@
 
 #include <chrono>
 #include <string>
+#include <cstring>
 #include <thread>
 #include <vector>
 

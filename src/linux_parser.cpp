@@ -256,11 +256,11 @@ string LinuxParser::Command(int pid) {
   return cmdLine;
 }
 
-string LinuxParser::Ram(int pid) {
+long int LinuxParser::Ram(int pid) {
   std::ifstream filestream(kProcDirectory + to_string(pid) + kStatusFilename);
   string line;
   string label;
-  long value{0};
+  long value;
   long memory{0};
 
   if (filestream.is_open()) {
@@ -275,7 +275,7 @@ string LinuxParser::Ram(int pid) {
     }
   }
 
-  return to_string(memory / 1000);
+  return memory / 1000;
 }
 
 string LinuxParser::Uid(int pid) {

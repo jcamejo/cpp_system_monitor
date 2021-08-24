@@ -20,11 +20,11 @@ public:
   bool operator<(Process const &a) const; // TODO: See src/process.cpp
 
   Process(int pid, string basePath) : pid_(pid) {
-    path_ = basePath + "/" + std::to_string(pid_);
-    cpu_usage = CpuUtilization();
+    path_ = basePath + std::to_string(pid_);
   };
 
   float cpu_usage;
+  long int memory{0};
 
 private:
   int pid_;

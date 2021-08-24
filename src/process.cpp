@@ -21,7 +21,11 @@ float Process::CpuUtilization() { return LinuxParser::CpuUtilization(pid_); }
 string Process::Command() { return LinuxParser::Command(pid_); }
 
 // TODO: Return this process's memory utilization
-string Process::Ram() { return LinuxParser::Ram(pid_); }
+string Process::Ram() { 
+  long int ram = LinuxParser::Ram(pid_);
+  memory = ram;
+  return to_string(memory); 
+}
 
 // TODO: Return the user (name) that generated this process
 string Process::User() { return LinuxParser::Uid(pid_); }
@@ -29,8 +33,6 @@ string Process::User() { return LinuxParser::Uid(pid_); }
 // TODO: Return the age of this process (in seconds)
 long int Process::UpTime() { return LinuxParser::UpTime(pid_); }
 
-// REMOVE: [[maybe_unused]] once you define the function
-
 bool Process::operator<(Process const &a) const {
-  return cpu_usage > a.cpu_usage;
+  return a.memory < memory;
 }
