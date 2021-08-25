@@ -2,7 +2,7 @@
 #define OS_PARSER_H
 
 // TODO: OS PARSER COMPLETE Refactor
-class OsParser {
+class IOsParser {
 public:
   // System
   virtual float MemoryUtilization() const = 0;
