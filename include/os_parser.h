@@ -1,9 +1,27 @@
 #ifndef OS_PARSER_H
 #define OS_PARSER_H
 
-// TODO: OS PARSER COMPLETE Refactor
-class IOsParser {
+#include <fstream>
+#include <regex>
+#include <string>
+#include <vector>
+
+using std::string;
+
+class OsParser {
 public:
+  // Paths
+  const string kProcDirectory{"/proc/"};
+  const string kCmdlineFilename{"/cmdline"};
+  const string kCpuinfoFilename{"/cpuinfo"};
+  const string kStatusFilename{"/status"};
+  const string kStatFilename{"/stat"};
+  const string kUptimeFilename{"/uptime"};
+  const string kMeminfoFilename{"/meminfo"};
+  const string kVersionFilename{"/version"};
+  const string kOSPath{"/etc/os-release"};
+  const string kPasswordPath{"/etc/passwd"};
+
   // System
   virtual float MemoryUtilization() const = 0;
   virtual long UpTime() const = 0;
@@ -22,5 +40,5 @@ public:
   virtual std::string Uid(int pid) const = 0;
   virtual std::string User(int pid) const = 0;
   virtual long int UpTime(int pid) const = 0;
-} // namespace OsParser
+};
 #endif

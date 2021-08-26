@@ -3,8 +3,8 @@
 #include <curses.h>
 
 #include <chrono>
-#include <string>
 #include <cstring>
+#include <string>
 #include <thread>
 #include <vector>
 

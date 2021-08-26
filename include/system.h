@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 
+#include "os_parser.h"
 #include "process.h"
 #include "processor.h"
 
@@ -18,9 +19,12 @@ public:
   std::string Kernel();
   std::string OperatingSystem();
 
+  System(OsParser *parser) : parser_(parser) { cpu_ = new Processor(parser_); };
+
 private:
-  Processor cpu_ = {};
   std::vector<Process> processes_ = {};
+  OsParser *parser_ = nullptr;
+  Processor *cpu_;
 };
 
 #endif

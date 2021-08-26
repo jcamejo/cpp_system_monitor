@@ -19,3 +19,13 @@ vector<string> Helpers::Tokenize(string str, char delim) {
 
   return tokens;
 }
+
+bool IsNumber(const string &str) {
+  for (char const &c : str) {
+    if (std::isdigit(c) == 0) {
+      return false;
+    }
+  }
+
+  return true;
+}

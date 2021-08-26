@@ -1,56 +1,57 @@
-#ifndef SYSTEM_PARSER_H
-#define SYSTEM_PARSER_H
+#ifndef LINUX_PARSER_H
+#define LINUX_PARSER_H
+
+#include "os_parser.h"
 
 #include <fstream>
 #include <regex>
 #include <string>
 
-namespace LinuxParser {
-// Paths
-const std::string kProcDirectory{"/proc/"};
-const std::string kCmdlineFilename{"/cmdline"};
-const std::string kCpuinfoFilename{"/cpuinfo"};
-const std::string kStatusFilename{"/status"};
-const std::string kStatFilename{"/stat"};
-const std::string kUptimeFilename{"/uptime"};
-const std::string kMeminfoFilename{"/meminfo"};
-const std::string kVersionFilename{"/version"};
-const std::string kOSPath{"/etc/os-release"};
-const std::string kPasswordPath{"/etc/passwd"};
+using std::string;
 
-// System
-float MemoryUtilization();
-long UpTime();
-std::vector<int> Pids();
-int TotalProcesses();
-int RunningProcesses();
-std::string OperatingSystem();
-std::string Kernel();
+class LinuxParser : public OsParser {
+public:
+  // Paths
+  const string kProcDirectory{"/proc/"};
+  const string kCmdlineFilename{"/cmdline"};
+  const string kCpuinfoFilename{"/cpuinfo"};
+  const string kStatusFilename{"/status"};
+  const string kStatFilename{"/stat"};
+  const string kUptimeFilename{"/uptime"};
+  const string kMeminfoFilename{"/meminfo"};
+  const string kVersionFilename{"/version"};
+  const string kOSPath{"/etc/os-release"};
+  const string kPasswordPath{"/etc/passwd"};
 
-// CPU
-enum CPUStates {
-  kUser_ = 0,
-  kNice_,
-  kSystem_,
-  kIdle_,
-  kIOwait_,
-  kIRQ_,
-  kSoftIRQ_,
-  kSteal_,
-  kGuest_,
-  kGuestNice_
+  enum CPUStates {
+    kUser_ = 0,
+    kNice_,
+    kSystem_,
+    kIdle_,
+    kIOwait_,
+    kIRQ_,
+    kSoftIRQ_,
+    kSteal_,
+    kGuest_,
+    kGuestNice_
+  };
+
+  // System
+  float MemoryUtilization() const override;
+  long UpTime() const override;
+  std::vector<int> Pids() const override;
+  int TotalProcesses() const override;
+  int RunningProcesses() const override;
+  string OperatingSystem() const override;
+  string Kernel() const override;
+  std::vector<string> CpuUtilization() const override;
+  long CpuUtilization(int pid) const override;
+
+  // Processes
+  string Command(int pid) const override;
+  long int Ram(int pid) const override;
+  string Uid(int pid) const override;
+  string User(int pid) const override;
+  long UpTime(int pid) const override;
 };
-
-std::vector<std::string> CpuUtilization();
-long CpuUtilization(int pid);
-
-// Processes
-std::string Command(int pid);
-long int Ram(int pid);
-std::string Uid(int pid);
-std::string User(int pid);
-long int UpTime(int pid);
-
-}; // namespace LinuxParser
-
 #endif

@@ -53,7 +53,7 @@ float Processor::Utilization() {
 
   float used{0};
 
-  cpus = LinuxParser::CpuUtilization();
+  cpus = parser_->CpuUtilization();
 
   // using only one CPU
   if (cpus.size() >= 1) {

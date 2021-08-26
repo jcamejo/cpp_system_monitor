@@ -19,8 +19,7 @@ using std::vector;
 
 namespace fs = std::filesystem;
 
-// Idea: Making the Parser adaptable to not only the Linux Parser but also other
-string LinuxParser::OperatingSystem() {
+string LinuxParser::OperatingSystem() const {
   string line;
   string key;
   string value;
@@ -43,7 +42,7 @@ string LinuxParser::OperatingSystem() {
   return value;
 }
 
-string LinuxParser::Kernel() {
+string LinuxParser::Kernel() const {
   string os, kernel, version;
   string line;
   std::ifstream stream(kProcDirectory + kVersionFilename);
@@ -55,7 +54,7 @@ string LinuxParser::Kernel() {
   return kernel;
 }
 
-vector<int> LinuxParser::Pids() {
+vector<int> LinuxParser::Pids() const {
   vector<int> pids;
 
   for (auto &dir : fs::directory_iterator(kProcDirectory)) {
@@ -69,7 +68,7 @@ vector<int> LinuxParser::Pids() {
   return pids;
 }
 
-float LinuxParser::MemoryUtilization() {
+float LinuxParser::MemoryUtilization() const {
   string line;
   string label;
   float value;
@@ -100,7 +99,7 @@ float LinuxParser::MemoryUtilization() {
   return memUsed / memTotal;
 }
 
-long LinuxParser::UpTime() {
+long LinuxParser::UpTime() const {
   string line;
   string label;
   long uptime;
@@ -124,7 +123,7 @@ long LinuxParser::UpTime() {
 // 1,000, then it is incremented 1,000 times (that is, one tick every 1/1,000
 // seconds). Once defined, the programmable interrupt timer (PIT), which is a
 // hardware component, is programmed with that value
-vector<string> LinuxParser::CpuUtilization() {
+vector<string> LinuxParser::CpuUtilization() const {
   string line;
   vector<string> cpus;
   std::ifstream filestream(kProcDirectory + kStatFilename);
@@ -140,7 +139,7 @@ vector<string> LinuxParser::CpuUtilization() {
   return cpus;
 }
 
-long LinuxParser::CpuUtilization(int pid) {
+long LinuxParser::CpuUtilization(int pid) const {
   long uptime = LinuxParser::UpTime();
   string line;
   char delim = ' ';
@@ -151,9 +150,9 @@ long LinuxParser::CpuUtilization(int pid) {
   long cstime;    // Waited-for children's CPU time spent in kernel code
                   // (in clock ticks)
   long starttime; // Time when the process started, measured in clock ticks
-  long totalTime;
+  float totalTime;
   long seconds;
-  long usage;
+  float usage;
   long hertz = sysconf(_SC_CLK_TCK);
 
   vector<string> procData{};
@@ -179,23 +178,13 @@ long LinuxParser::CpuUtilization(int pid) {
     return 0;
   }
 
-  totalTime = totalTime / hertz;
-  usage = totalTime / seconds;
+  totalTime = totalTime / (float)hertz;
+  usage = totalTime / (float)seconds;
 
   return usage;
 }
 
-bool IsNumber(const string &str) {
-  for (char const &c : str) {
-    if (std::isdigit(c) == 0) {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-int LinuxParser::TotalProcesses() {
+int LinuxParser::TotalProcesses() const {
   string line;
   string label;
   int value;
@@ -218,7 +207,7 @@ int LinuxParser::TotalProcesses() {
   return total;
 }
 
-int LinuxParser::RunningProcesses() {
+int LinuxParser::RunningProcesses() const {
   string line;
   string label;
   int value;
@@ -241,7 +230,7 @@ int LinuxParser::RunningProcesses() {
   return total;
 }
 
-string LinuxParser::Command(int pid) {
+string LinuxParser::Command(int pid) const {
   std::ifstream filestream(kProcDirectory + to_string(pid) + kCmdlineFilename);
   string cmdLine;
   string line;
@@ -256,7 +245,7 @@ string LinuxParser::Command(int pid) {
   return cmdLine;
 }
 
-long int LinuxParser::Ram(int pid) {
+long int LinuxParser::Ram(int pid) const {
   std::ifstream filestream(kProcDirectory + to_string(pid) + kStatusFilename);
   string line;
   string label;
@@ -278,11 +267,10 @@ long int LinuxParser::Ram(int pid) {
   return memory / 1000;
 }
 
-string LinuxParser::Uid(int pid) {
+string LinuxParser::Uid(int pid) const {
   string label;
-  string line;
-  string username;
   string user;
+  string line;
   string userId;
   vector<string> userData;
   string uid;
@@ -303,6 +291,15 @@ string LinuxParser::Uid(int pid) {
     }
   }
 
+  return uid;
+}
+
+string LinuxParser::User(int pid) const {
+  string line;
+  string username;
+  vector<string> userData;
+  string uid = Uid(pid);
+
   std::ifstream etcFilestream(kPasswordPath);
 
   if (etcFilestream.is_open()) {
@@ -319,9 +316,7 @@ string LinuxParser::Uid(int pid) {
   return username;
 }
 
-string LinuxParser::User(int pid [[maybe_unused]]) { return string(); }
-
-long LinuxParser::UpTime(int pid) {
+long LinuxParser::UpTime(int pid) const {
   string line;
   char delim = ' ';
   long seconds;

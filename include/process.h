@@ -1,5 +1,6 @@
 #ifndef PROCESS_H
 #define PROCESS_H
+#include "os_parser.h"
 
 #include <string>
 /*
@@ -11,16 +12,16 @@ using std::string;
 
 class Process {
 public:
-  int Pid();                              // TODO: See src/process.cpp
-  std::string User();                     // TODO: See src/process.cpp
-  std::string Command();                  // TODO: See src/process.cpp
-  float CpuUtilization();                 // TODO: See src/process.cpp
-  std::string Ram();                      // TODO: See src/process.cpp
-  long int UpTime();                      // TODO: See src/process.cpp
-  bool operator<(Process const &a) const; // TODO: See src/process.cpp
+  int Pid();
+  std::string User();
+  std::string Command();
+  float CpuUtilization();
+  std::string Ram();
+  long int UpTime();
+  bool operator<(Process const &a) const;
 
-  Process(int pid, string basePath) : pid_(pid) {
-    path_ = basePath + std::to_string(pid_);
+  Process(int pid, OsParser *parser) : pid_(pid), parser_(parser) {
+    path_ = parser->kProcDirectory + std::to_string(pid_);
   };
 
   float cpu_usage;
@@ -28,6 +29,7 @@ public:
 
 private:
   int pid_;
+  OsParser *parser_;
   std::string path_;
 };
 

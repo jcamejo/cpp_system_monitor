@@ -4,34 +4,25 @@
 #include <unistd.h>
 #include <vector>
 
-#include "linux_parser.h"
 #include "process.h"
 
 using std::string;
 using std::to_string;
 using std::vector;
 
-// TODO: Return this process's ID
 int Process::Pid() { return pid_; }
 
-// TODO: Return this process's CPU utilization
-float Process::CpuUtilization() { return LinuxParser::CpuUtilization(pid_); }
+float Process::CpuUtilization() { return parser_->CpuUtilization(pid_); }
 
-// TODO: Return the command that generated this process
-string Process::Command() { return LinuxParser::Command(pid_); }
+string Process::Command() { return parser_->Command(pid_); }
 
-// TODO: Return this process's memory utilization
-string Process::Ram() { 
-  memory = LinuxParser::Ram(pid_);
-  return to_string(memory); 
+string Process::Ram() {
+  memory = parser_->Ram(pid_);
+  return to_string(memory);
 }
 
-// TODO: Return the user (name) that generated this process
-string Process::User() { return LinuxParser::Uid(pid_); }
+string Process::User() { return parser_->User(pid_); }
 
-// TODO: Return the age of this process (in seconds)
-long int Process::UpTime() { return LinuxParser::UpTime(pid_); }
+long int Process::UpTime() { return parser_->UpTime(pid_); }
 
-bool Process::operator<(Process const &b) const {
-  return memory < b.memory ;
-}
+bool Process::operator<(Process const &b) const { return memory < b.memory; }

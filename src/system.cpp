@@ -16,13 +16,13 @@ using std::size_t;
 using std::string;
 using std::vector;
 
-Processor &System::Cpu() { return cpu_; }
+Processor &System::Cpu() { return *cpu_; }
 
 vector<Process> &System::Processes() {
-  vector<int> pids = LinuxParser::Pids();
+  vector<int> pids = parser_->Pids();
 
   for (int pid : pids) {
-    Process p(pid, LinuxParser::kProcDirectory);
+    Process p(pid, parser_);
     processes_.push_back(p);
   }
 
@@ -32,14 +32,14 @@ vector<Process> &System::Processes() {
 }
 
 // OS
-std::string System::Kernel() { return LinuxParser::Kernel(); }
+std::string System::Kernel() { return parser_->Kernel(); }
 
-float System::MemoryUtilization() { return LinuxParser::MemoryUtilization(); }
+float System::MemoryUtilization() { return parser_->MemoryUtilization(); }
 
-std::string System::OperatingSystem() { return LinuxParser::OperatingSystem(); }
+std::string System::OperatingSystem() { return parser_->OperatingSystem(); }
 
-int System::RunningProcesses() { return LinuxParser::RunningProcesses(); }
+int System::RunningProcesses() { return parser_->RunningProcesses(); }
 
-int System::TotalProcesses() { return LinuxParser::TotalProcesses(); }
+int System::TotalProcesses() { return parser_->TotalProcesses(); }
 
-long int System::UpTime() { return LinuxParser::UpTime(); }
+long int System::UpTime() { return parser_->UpTime(); }

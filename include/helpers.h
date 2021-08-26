@@ -8,5 +8,6 @@ using std::vector;
 
 namespace Helpers {
 vector<std::string> Tokenize(std::string str, char delim);
+bool IsNumber(const std::string &str);
 } // namespace Helpers
 #endif

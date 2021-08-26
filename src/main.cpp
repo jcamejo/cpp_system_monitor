@@ -1,4 +1,4 @@
-#include "linux_parser_class.h"
+#include "linux_parser.h"
 #include "ncurses_display.h"
 #include "os_parser.h"
 #include "system.h"
@@ -9,8 +9,8 @@ int main() {
 #else
   throw "OS not supported";
 #endif
-  System system; // system(parser)
-  IOsParser *parserptr = nullptr;
+  OsParser *parserptr = nullptr;
   parserptr = &parser;
+  System system(parserptr); // system(parser)
   NCursesDisplay::Display(system, system.Processes().size());
 }
