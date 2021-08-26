@@ -45,11 +45,11 @@ public:
   string OperatingSystem() const override;
   string Kernel() const override;
   std::vector<string> CpuUtilization() const override;
-  long CpuUtilization(int pid) const override;
+  float CpuUtilization(int pid) const override;
 
   // Processes
   string Command(int pid) const override;
-  long int Ram(int pid) const override;
+  float Ram(int pid) const override;
   string Uid(int pid) const override;
   string User(int pid) const override;
   long UpTime(int pid) const override;

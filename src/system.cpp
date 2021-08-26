@@ -20,6 +20,7 @@ Processor &System::Cpu() { return *cpu_; }
 
 vector<Process> &System::Processes() {
   vector<int> pids = parser_->Pids();
+  processes_ = {};
 
   for (int pid : pids) {
     Process p(pid, parser_);

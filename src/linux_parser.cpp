@@ -5,6 +5,7 @@
 #include <dirent.h>
 #include <unistd.h>
 
+#include <cmath>
 #include <filesystem>
 #include <iostream>
 #include <sstream>
@@ -139,7 +140,7 @@ vector<string> LinuxParser::CpuUtilization() const {
   return cpus;
 }
 
-long LinuxParser::CpuUtilization(int pid) const {
+float LinuxParser::CpuUtilization(int pid) const {
   long uptime = LinuxParser::UpTime();
   string line;
   char delim = ' ';
@@ -181,7 +182,7 @@ long LinuxParser::CpuUtilization(int pid) const {
   totalTime = totalTime / (float)hertz;
   usage = totalTime / (float)seconds;
 
-  return usage;
+  return usage * 100;
 }
 
 int LinuxParser::TotalProcesses() const {
@@ -245,7 +246,7 @@ string LinuxParser::Command(int pid) const {
   return cmdLine;
 }
 
-long int LinuxParser::Ram(int pid) const {
+float LinuxParser::Ram(int pid) const {
   std::ifstream filestream(kProcDirectory + to_string(pid) + kStatusFilename);
   string line;
   string label;
@@ -257,14 +258,14 @@ long int LinuxParser::Ram(int pid) const {
       std::istringstream linestream(line);
       while (linestream >> label >> value) {
         if (label == "VmSize:") {
-          memory = value;
+          memory = value / 1000.0;
           break;
         }
       }
     }
   }
 
-  return memory / 1000;
+  return std::ceil(memory * 100) / 100.0;
 }
 
 string LinuxParser::Uid(int pid) const {

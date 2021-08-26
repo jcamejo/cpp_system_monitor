@@ -45,8 +45,6 @@ float Processor::Utilization() {
   unsigned int irq{0};
   unsigned int softirq{0};
   unsigned int steal{0};
-  unsigned int guest{0};
-  unsigned int guestNice{0};
   unsigned int idled{0};
   unsigned int nonIdled{0};
   unsigned int total{0};
@@ -78,8 +76,6 @@ float Processor::Utilization() {
   irq = usage[5];
   softirq = usage[6];
   steal = usage[7];
-  guest = usage[8];
-  guestNice = usage[9];
 
   idled = idle + iowait;
   nonIdled = user + nice + system + irq + softirq + steal;

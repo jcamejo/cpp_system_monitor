@@ -32,11 +32,11 @@ public:
   virtual std::string Kernel() const = 0;
 
   virtual std::vector<std::string> CpuUtilization() const = 0;
-  virtual long CpuUtilization(int pid) const = 0;
+  virtual float CpuUtilization(int pid) const = 0;
 
   // Processes
   virtual std::string Command(int pid) const = 0;
-  virtual long int Ram(int pid) const = 0;
+  virtual float Ram(int pid) const = 0;
   virtual std::string Uid(int pid) const = 0;
   virtual std::string User(int pid) const = 0;
   virtual long int UpTime(int pid) const = 0;
