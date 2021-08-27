@@ -7,8 +7,10 @@
 #include <string>
 #include <vector>
 
+#include "helpers.h"
 #include "linux_parser.h"
 #include "process.h"
+
 #include "processor.h"
 
 using std::set;
@@ -29,7 +31,11 @@ vector<Process> &System::Processes() {
 
   std::sort(processes_.begin(), processes_.end(),
             [](const Process &a, const Process &b) { return b < a; });
-  return processes_;
+
+  vector<Process>::const_iterator first = processes_.begin();
+  vector<Process>::const_iterator last = processes_.begin() + totalProcesses_;
+  vector<Process> *procs = new vector<Process>(first, last);
+  return *procs;
 }
 
 // OS

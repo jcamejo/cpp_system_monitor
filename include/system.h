@@ -19,12 +19,16 @@ public:
   std::string Kernel();
   std::string OperatingSystem();
 
-  System(OsParser *parser) : parser_(parser) { cpu_ = new Processor(parser_); };
+  System(OsParser *parser, int totalProcesses = 20) : parser_(parser) {
+    totalProcesses_ = totalProcesses < 1 ? 1 : totalProcesses;
+    cpu_ = new Processor(parser_);
+  };
 
 private:
   std::vector<Process> processes_ = {};
   OsParser *parser_ = nullptr;
   Processor *cpu_;
+  int totalProcesses_;
 };
 
 #endif
