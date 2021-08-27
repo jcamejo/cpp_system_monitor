@@ -1,6 +1,7 @@
 #ifndef LINUX_PARSER_H
 #define LINUX_PARSER_H
 
+#include "helpers.h"
 #include "os_parser.h"
 
 #include <fstream>
@@ -8,6 +9,7 @@
 #include <string>
 
 using std::string;
+using std::vector;
 
 class LinuxParser : public OsParser {
 public:
@@ -53,5 +55,9 @@ public:
   string Uid(int pid) const override;
   string User(int pid) const override;
   long UpTime(int pid) const override;
+
+private:
+  int kernelMajorVer_{0};
+  int kernelMinorVer_{0};
 };
 #endif

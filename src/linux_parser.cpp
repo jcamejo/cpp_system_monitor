@@ -52,6 +52,7 @@ string LinuxParser::Kernel() const {
     std::istringstream linestream(line);
     linestream >> os >> version >> kernel;
   }
+
   return kernel;
 }
 
@@ -105,6 +106,7 @@ long LinuxParser::UpTime() const {
   string label;
   long uptime;
   long idleUptime;
+  vector<string> kernelVersion = Helpers::Tokenize(Kernel(), '.');
 
   std::ifstream filestream(kProcDirectory + kUptimeFilename);
 
@@ -246,6 +248,9 @@ string LinuxParser::Command(int pid) const {
   return cmdLine;
 }
 
+// Using VmRSS to reflect the physical memory used
+// instead of the virtual memory (VmSize),
+// making the stats a little more comprehensive
 float LinuxParser::Ram(int pid) const {
   std::ifstream filestream(kProcDirectory + to_string(pid) + kStatusFilename);
   string line;
@@ -257,7 +262,7 @@ float LinuxParser::Ram(int pid) const {
     while (std::getline(filestream, line)) {
       std::istringstream linestream(line);
       while (linestream >> label >> value) {
-        if (label == "VmSize:") {
+        if (label == "VmRSS:") {
           memory = value / 1000.0;
           break;
         }
@@ -320,9 +325,9 @@ string LinuxParser::User(int pid) const {
 long LinuxParser::UpTime(int pid) const {
   string line;
   char delim = ' ';
-  long seconds;
+  long uptimeProcess;
   long hertz = sysconf(_SC_CLK_TCK);
-  long starttime;
+  long startTime;
   vector<string> procData;
 
   std::ifstream filestream(kProcDirectory + to_string(pid) + kStatFilename);
@@ -330,11 +335,12 @@ long LinuxParser::UpTime(int pid) const {
   if (filestream.is_open()) {
     while (std::getline(filestream, line)) {
       procData = Helpers::Tokenize(line, delim);
-      starttime = (std::stoul(procData[21]));
+      startTime = std::stoul(procData[21]) / hertz;
     }
   }
 
-  seconds = starttime / hertz;
+  long systemUpdate = UpTime();
+  uptimeProcess = systemUpdate - startTime;
 
-  return seconds;
+  return uptimeProcess;
 }
