@@ -72,7 +72,7 @@ vector<int> LinuxParser::Pids() const {
 float LinuxParser::MemoryUtilization() const {
   string line;
   string label;
-  float value;
+  float value{0};
   float memTotal{0};
   float memFree{0};
   float memUsed{0};
