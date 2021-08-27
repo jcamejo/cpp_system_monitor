@@ -11,6 +11,6 @@ int main() {
 #endif
   OsParser *parserptr = nullptr;
   parserptr = &parser;
-  System system(parserptr); // system(parser)
+  System system(parserptr, 20); // system(parser)
   NCursesDisplay::Display(system, system.Processes().size());
 }
